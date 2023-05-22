@@ -1,4 +1,4 @@
-import React, { FC, ChangeEvent, useState } from "react";
+import React, { FC, ChangeEvent, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { deleteTask, doneTask, Task, editTask } from "@/store/reducer";
@@ -53,7 +53,7 @@ const BtnWrapp = styled.div`
 export const ItemList: FC<{ task: Task }> = ({ task }) => {
   const [edit, setEdit] = useState<boolean>(false);
   const [editText, setEditText] = useState<string>(task.text);
-  const [isChecked, setIsChecked] = useState(task.done);
+  const [isChecked, setIsChecked] = useState(false);
 
   const inputText = (event: ChangeEvent<HTMLInputElement>) => {
     setEditText(event.currentTarget.value);
@@ -70,6 +70,9 @@ export const ItemList: FC<{ task: Task }> = ({ task }) => {
     dispatch(doneTask({ id: task.id }));
     setIsChecked(!isChecked);
   };
+  useEffect(() => {
+    setIsChecked(task.done);
+  }, [task]);
   return (
     <Wrapp done={task.done}>
       <DateInf>{task.date}</DateInf>
