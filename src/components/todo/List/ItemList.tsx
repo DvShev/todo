@@ -82,6 +82,7 @@ export const ItemList: FC<{ task: Task }> = ({ task }) => {
         )}
       </div>
       <BtnWrapp>
+        Done {"->"}
         <CheckBox type="checkbox" checked={isChecked} onChange={handleDone} />
         {!task.done && (
           <>
@@ -96,7 +97,6 @@ export const ItemList: FC<{ task: Task }> = ({ task }) => {
             )}
           </>
         )}
-
         <Btn color="#CD5C5C" onClick={() => handleDelete()}>
           Delete
         </Btn>
